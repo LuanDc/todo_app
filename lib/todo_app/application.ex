@@ -9,7 +9,8 @@ defmodule TodoApp.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: TodoApp.Worker.start_link(arg)
-      # {TodoApp.Worker, arg}
+      TodoApp.TodoItemsRepo,
+      {GRPC.Server.Supervisor, endpoint: TodoApp.Endpoint, port: 50051, start_server: true}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
